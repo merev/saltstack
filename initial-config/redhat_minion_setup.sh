@@ -13,6 +13,8 @@ echo "* Point the minions to the master ..."
 sed -i "16s/salt/server/" /etc/salt/minion
 sed -i "16s/#//" /etc/salt/minion
 
-echo "* Restart the service ..."
+echo "* Restart the service and show its status..."
+
 systemctl restart salt-minion
+systemctl status salt-minion
 

@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     server.vm.network "private_network", ip: "192.168.99.100"
     server.vm.provision "shell", path: "initial-config/add_hosts.sh"
     server.vm.provision "shell", path: "initial-config/redhat_master_setup.sh"
-
+  
     server.vm.provider "virtualbox" do |v|
       v.gui = false
       v.memory = 2048
