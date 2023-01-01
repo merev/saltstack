@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
     server.vm.box = "merev/centos-stream-8"
     server.vm.hostname = "server"
     server.vm.network "private_network", ip: "192.168.99.100"
-    server.vm.provision "shell", path: "add_hosts.sh"
-	server.vm.provision "shell", path: "add_packages_centos.sh"
+    server.vm.provision "shell", path: "initial-config/add_hosts.sh"
+    server.vm.provision "shell", path: "initial-config/redhat_master_setup.sh"
 
     server.vm.provider "virtualbox" do |v|
       v.gui = false
@@ -24,8 +24,8 @@ Vagrant.configure("2") do |config|
     web1.vm.box = "merev/centos-stream-8"
     web1.vm.hostname = "client-web-1"
     web1.vm.network "private_network", ip: "192.168.99.101"
-    web1.vm.provision "shell", path: "add_hosts.sh"
-	web1.vm.provision "shell", path: "add_packages_centos.sh"
+    web1.vm.provision "shell", path: "initial-config/add_hosts.sh"
+    web1.vm.provision "shell", path: "initial-config/redhat_minion_setup.sh"
 
     web1.vm.provider "virtualbox" do |v|
       v.gui = false
@@ -39,40 +39,10 @@ Vagrant.configure("2") do |config|
     web2.vm.box = "merev/debian-11"
     web2.vm.hostname = "client-web-2"
     web2.vm.network "private_network", ip: "192.168.99.102"
-    web2.vm.provision "shell", path: "add_hosts.sh"
-	web2.vm.provision "shell", path: "add_packages_debian.sh"
+    web2.vm.provision "shell", path: "initial-config/add_hosts.sh"
+    web2.vm.provision "shell", path: "initial-config/debian_minion_setup.sh"
 
     web2.vm.provider "virtualbox" do |v|
-      v.gui = false
-      v.memory = 512
-      v.cpus = 1
-    end
-  end
-  
-  # Salt Client #3 - CentOS 8.x
-  config.vm.define "db1" do |db1|
-    db1.vm.box = "merev/centos-stream-8"
-    db1.vm.hostname = "client-db-1"
-    db1.vm.network "private_network", ip: "192.168.99.103"
-    db1.vm.provision "shell", path: "add_hosts.sh"
-	db1.vm.provision "shell", path: "add_packages_centos.sh"
-
-    db1.vm.provider "virtualbox" do |v|
-      v.gui = false
-      v.memory = 512
-      v.cpus = 1
-    end
-  end
-
-  # Salt Client #4 - Debian 11
-  config.vm.define "db2" do |db2|
-    db2.vm.box = "merev/debian-11"
-    db2.vm.hostname = "client-db-2"
-    db2.vm.network "private_network", ip: "192.168.99.104"
-    db2.vm.provision "shell", path: "add_hosts.sh"
-	db2.vm.provision "shell", path: "add_packages_debian.sh"
-
-    db2.vm.provider "virtualbox" do |v|
       v.gui = false
       v.memory = 512
       v.cpus = 1
