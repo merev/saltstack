@@ -1,3 +1,7 @@
 base:
-  'client-docker':
+  'docker':
     - nginx-container
+  'web':
+    - web-server-components
+  'db':
+    - db-components
