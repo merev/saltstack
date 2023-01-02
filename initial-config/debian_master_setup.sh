@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "* Add any prerequisites ..."
-apt-get update -y && apt-get install -y python3
+apt-get update -y && apt-get install -y python3 python3-pip
 
 echo "* Add the key ..."
 curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/debian/11/amd64/latest/salt-archive-keyring.gpg
@@ -22,13 +22,16 @@ mkdir -p /srv/salt
 sed -i '850,852s/#//' /etc/salt/master
 mkdir -p /srv/pillar
 
+echo "* Copy the configuration data ..."
+cp /shared/master/* /srv/salt/
 
 echo "* Enable, start the Salt master service, and check if everything is okay ..."
 systemctl enable --now salt-master
 systemctl status salt-master
 
 echo "* Make the master to accept new keys periodically ..."
-echo "* * * * * root salt-keys -A" | tee /etc/conf.d/salt-keys
+touch /etc/cron.d/salt-keys
+echo "* * * * * root salt-key -yA" | tee /etc/cron.d/salt-keys
 
 
 

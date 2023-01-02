@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "* Add any prerequisites ..."
-dnf install -y python3
+dnf install -y python3 python3-pip
 
 echo "* Download the bootstrap script ..."
 wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
