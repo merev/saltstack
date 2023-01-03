@@ -4,6 +4,10 @@
 {%   set vpackage = 'apache2' %}
 {% endif %}
 
+stop_selinux:
+  cmd.run:
+    - name: sudo setenforce 0
+
 install.webserver:
   pkg:
     - name: {{ vpackage }}
