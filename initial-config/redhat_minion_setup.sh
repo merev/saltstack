@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "* Stop SE Linux ..."
+sudo setenforce 0
+
 echo "* Add any prerequisites ..."
 dnf install -y python3 python3-pip
 
