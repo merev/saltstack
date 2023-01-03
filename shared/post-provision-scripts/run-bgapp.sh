@@ -3,7 +3,7 @@
 
 echo "* Copy the website data ..."
 mkdir -p /srv/salt/bgapp/
-cp /shared/bgapp-data/* /srv/salt/bgapp/
+cp -r /shared/bgapp-data/* /srv/salt/bgapp/
 
 echo "* Run BGapp ..."
 salt 'db' state.apply
