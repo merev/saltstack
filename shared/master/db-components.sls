@@ -11,6 +11,10 @@ config.db:
     - mode: replace
     - match: bind-address
 
+restart_mariadb:
+  cmd.run:
+    - name: sudo systemctl restart mariadb
+
 /tmp:
   file.recurse:
     - source: salt://bgapp/db/
