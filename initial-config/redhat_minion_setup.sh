@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "* Stop SE Linux ..."
-sudo setenforce 0
+sudo setenforce permissive
+sudo sed -i 's\=enforcing\=permissive\g' /etc/sysconfig/selinux
 
 echo "* Add any prerequisites ..."
 dnf install -y python3 python3-pip
