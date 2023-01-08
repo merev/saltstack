@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   # Salt Server - CentOS 8.x
   config.vm.define "server" do |server|
-    server.vm.box = "merev/centos-stream-8"
+    server.vm.box = "merev/centos-stream"
     server.vm.hostname = "server"
     server.vm.network "private_network", ip: "192.168.99.100"
     server.vm.synced_folder "shared/", "/shared"
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   
   # Salt Client #1 - CentOS 8.x
   config.vm.define "web" do |web|
-    web.vm.box = "merev/centos-stream-8"
+    web.vm.box = "merev/centos-stream"
     web.vm.hostname = "web"
     web.vm.network "private_network", ip: "192.168.99.101"
     web.vm.synced_folder "shared/", "/shared"
